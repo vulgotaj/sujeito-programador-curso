@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso HTML</title>
+</head>
+<body>
+
+  <h1>Formularios</h1>
+  <form>
+    <label for="pnome">Primeiro Nome</label>
+    <input type="text" id="pnome" name="pnome" placeholder="Seu primeiro nome" required> <br><br>
+
+    <label for="unome">Ultimo nome</label>
+    <input type="text" id="unome" name="unome" placeholder="Ultimo nome" required> <br><br>
+
+    <!-- Tipo RADIO -->
+    <label>
+      <strong>Qual seu nível como programador atualmente?</strong>
+    </label> <br>
+
+    <label>
+      <input type="radio" name="nivel" value="iniciante" checked>Sou iniciante
+    </label>
+    <label>
+      <input type="radio" name="nivel" value="medio">Comecei a pouco tempo
+    </label>
+    <label>
+      <input type="radio" name="nivel" value="avancado">Sou avançado
+    </label> <br><br>
+
+    <!-- Tipo Select para selecionar itens -->
+    <label for="escolaridade">
+      <strong>Sua escolaridade</strong>
+    </label>
+    <select id="escolaridade" required>
+      <option selected disabled value="">Selecione</option>
+      <option>Educaçao basica</option>
+      <option>Ensino médio</option>
+      <option>Ensino Superior</option>
+      <option>Pós graduação</option>
+    </select> <br><br>
+
+
+    <label>
+      <strong>Selecione as tecnologias que você conhece:</strong>
+    </label> <br><br>
+
+    <input type="checkbox" id="tecnologia1" name="tecnologia1" value="HTML">
+    <label for="tecnologia1"> HTML</label>
+
+    <input type="checkbox" id="tecnologia2" name="tecnologia2" value="CSS">
+    <label for="tecnologia2"> CSS</label>
+
+    <input type="checkbox" id="tecnologia3" name="tecnologia3" value="JavaScript">
+    <label for="tecnologia3"> JavaScript</label>
+
+    <input type="checkbox" id="tecnologia4" name="tecnologia4" value="PHP">
+    <label for="tecnologia4"> PHP</label>
+
+
+    <br><br>
+    <input type="submit" value="Cadastrar">
+  </form>
+
+</body>
+</html>
