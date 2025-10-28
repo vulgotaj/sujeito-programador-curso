@@ -1,14 +1,14 @@
-// function login(username: string): boolean | string {
-//     let message = 'Bem vindo ' + username;
+function login(username: string): boolean | string {
+    let message = 'Bem vindo ' + username;
 
-//     console.log(message);
+    console.log(message);
 
-//     return username
-// }
+    return username
+}
 
-// const usernameLogin = login("matheus");
+const usernameLogin = login("matheus");
 
-// console.log(usernameLogin)
+console.log(usernameLogin)
 
 let n1: number = 10;
 let n2: number = 25;

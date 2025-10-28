@@ -1,12 +1,12 @@
 "use strict";
-// function login(username: string): boolean | string {
-//     let message = 'Bem vindo ' + username;
 Object.defineProperty(exports, "__esModule", { value: true });
-//     console.log(message);
-//     return username
-// }
-// const usernameLogin = login("matheus");
-// console.log(usernameLogin)
+function login(username) {
+    let message = 'Bem vindo ' + username;
+    console.log(message);
+    return username;
+}
+const usernameLogin = login("matheus");
+console.log(usernameLogin);
 let n1 = 10;
 let n2 = 25;
 function soma(valor1, valor2) {
