@@ -18,4 +18,5 @@ function comprarItem(moeda: Moedas) {
     console.log("Comprando com a moeda: ", moeda)
 }
 
-comprarItem("BL"); 
+comprarItem("BRL"); 
+

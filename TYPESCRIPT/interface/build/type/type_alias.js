@@ -9,5 +9,5 @@ function logUsuario(uuid) {
 function comprarItem(moeda) {
     console.log("Comprando com a moeda: ", moeda);
 }
-comprarItem("BL");
+comprarItem("BRL");
 //# sourceMappingURL=type_alias.js.map

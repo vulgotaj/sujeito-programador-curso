@@ -13,6 +13,7 @@ const left4dead: JogoProps = {
 }
 
 interface DLC extends JogoProps {
+    jogoOriginal: JogoProps;
     novoConteudo: string[];
 }
 
@@ -21,8 +22,10 @@ const left4DeadDLC: DLC = {
     nome: "Left 4 Dead - New Maps",
     descricao: "4 novos mapas para jogar",
     plataforma: ["PS5", "PC"],
-    novoConteudo: ["Modo Coop"]
+    novoConteudo: ["Modo Coop"],
+    jogoOriginal: left4dead
 }
 
 console.log(left4dead);
 console.log(left4DeadDLC);
+
