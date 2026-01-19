@@ -1,20 +1,91 @@
-import { Header } from './components/header';
-import { Aluno } from './components/aluno';
-import { Footer } from './components/footer'
+import { useState, useEffect } from 'react'
 
-export default function App (){
-  return(
+export default function App() {
+  const [input, setInput] = useState("");
+  const [tasks, setTasks] = useState<string[]>([])
+
+  const [editTask, setEditTask] = useState({
+    enabled: false,
+    task: ''
+  })
+
+  useEffect(() => {
+    const tarefasSalvas = localStorage.getItem("@cursoreact")
+    
+    if(tarefasSalvas) {
+      setTasks(JSON.parse(tarefasSalvas));
+    }
+  }, [])
+
+  function handleRegister() {
+    if(!input){
+      alert("Preencha o nome da tarefa...")
+      return;
+    }
+
+    if(editTask.enabled) {
+      handleSaveEdit();
+      return;
+    }
+
+    setTasks(tarefas => [...tarefas, input])
+    setInput("")
+    localStorage.setItem("@cursoreact", JSON.stringify([...tasks, input]))
+    
+  }
+
+  function handleSaveEdit() {
+    const findIndexTask = tasks.findIndex(task => task === editTask.task)
+    const allTasks = [...tasks];
+
+    allTasks[findIndexTask] = input;
+    setTasks(allTasks);
+
+    setEditTask({
+      enabled: false,
+      task: ''
+    })
+
+    setInput("")
+    localStorage.setItem("@cursoreact", JSON.stringify(allTasks))
+  }
+
+  function handleDelete(item: string) {
+    const removeTask = tasks.filter( task => task !== item);
+    setTasks(removeTask);
+    localStorage.setItem("@cursoreact", JSON.stringify(removeTask))
+  }
+
+  function handleEdit(item: string) {
+    setInput(item);
+    setEditTask({
+      enabled: true,
+      task: item
+    })
+  }
+
+  return (
     <div>
-      <Header title="Paçoca"/>
-      <Aluno nome="Felipe Tajima" idade={20} />
-      <Aluno nome="Beatriz Busson" idade={21}/>
-      <Aluno nome="Felipe Brito" idade={22}/>
-      <Footer/>
+      <h1>Lista de Tarefas</h1>
+      <input
+        placeholder="Digite o nome da tarefa!"
+        value={input}
+        onChange={ (e) => setInput(e.target.value) }
+      />
+
+      <button onClick={handleRegister}>
+        {editTask.enabled ? "Atualizar Tarefa" : "Adicionar Tarefa"}
+      </button>
+
+      <hr/>
+
+      {tasks.map((item) => (
+        <section key={item}>
+          <span>{item}</span>
+          <button onClick={ () => handleEdit(item) }>Editar</button>
+          <button onClick={ () => handleDelete(item) }>Excluir</button>
+        </section>
+      ))}
     </div>
-
-
   )
 }
-
-
-
