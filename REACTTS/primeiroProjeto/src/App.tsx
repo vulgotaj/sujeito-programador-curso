@@ -1,115 +1,29 @@
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
+import { useState } from 'react'
 
 export default function App() {
+  const [nome, setNome] = useState("")
+  const [anoNasc, setAnoNasc] = useState("");
+  const [idade, setIdade] = useState<number>();
 
-  const inputRef = useRef<HTMLInputElement>(null); 
-  const firstRender = useRef(true);
-
-  const [input, setInput] = useState("");
-  const [tasks, setTasks] = useState<string[]>([])
-
-  const [editTask, setEditTask] = useState({
-    enabled: false,
-    task: ''
-  })
-
-  useEffect(() => {
-    const tarefasSalvas = localStorage.getItem("@cursoreact")
-    
-    if(tarefasSalvas) {
-      setTasks(JSON.parse(tarefasSalvas));
-    }
-  }, [])
-
-  useEffect(() => {
-    if(firstRender.current){
-      firstRender.current = false;
-      return;
-    }
-
-    localStorage.setItem("@cursoreact", JSON.stringify(tasks))
-  }, [tasks])
-
-
-  const handleRegister = useCallback(() => {
-    if(!input){                                                     
-      alert("Preencha o nome da tarefa...")                         
-      return;                                                       
-    }                                                               
-                                                                    
-    if(editTask.enabled) {                                          
-      handleSaveEdit();                                             
-      return;                                                       
-    }                                                               
-                                                                    
-    setTasks(tarefas => [...tarefas, input])                        
-    setInput("")                                                    
-  }, [input, tasks])                                                
-
-  function handleSaveEdit() {
-    const findIndexTask = tasks.findIndex(task => task === editTask.task)
-    const allTasks = [...tasks];
-
-    allTasks[findIndexTask] = input;
-    setTasks(allTasks);
-
-    setEditTask({
-      enabled: false,
-      task: ''
-    })
-
-    setInput("")
-    
+  function getIdade() {
+    const anoAtual = new Date().getFullYear();
+    setIdade(anoAtual - Number(anoNasc))
   }
-
-  function handleDelete(item: string) {
-    const removeTask = tasks.filter( task => task !== item);
-    setTasks(removeTask);
-    
-  }
-
-  function handleEdit(item: string) {
-
-    inputRef.current?.focus() 
-
-    setInput(item);
-    setEditTask({
-      enabled: true,
-      task: item
-    })
-  }
-
-  const totalTarefas = useMemo(() => {
-    return tasks.length                             
-  }, [tasks])
 
   return (
     <div>
-      <h1>Lista de Tarefas</h1>
-      <input
-        placeholder="Digite o nome da tarefa!"
-        value={input}
-        onChange={ (e) => setInput(e.target.value) }
-        ref={inputRef}
-      />
+      <h1>Descubra sua idade</h1>
+      <div>
+        <label>Digite seu nome:</label>
+        <input type="text" value={nome} onChange={ (e) => { setNome(e.target.value) } }/>
+        <label>Digite seu ano de nascimento:</label>
+        <input type="number" value={anoNasc} onChange={ (e) => { setAnoNasc(e.target.value) } } />
 
-      <button onClick={handleRegister}>
-        {editTask.enabled ? "Atualizar Tarefa" : "Adicionar Tarefa"}
-      </button>
+        <button onClick={getIdade}>Descobrir idade</button>
+      </div>
 
-      <hr/>
+      {idade && <h1>{nome} tem {idade} anos</h1>}
 
-      <strong>Você tem {totalTarefas} tarefas!</strong>  
-      <br/>
-      <br/>
-
-      {tasks.map((item) => (
-        <section key={item}>
-          <span>{item}</span>
-          <button onClick={ () => handleEdit(item) }>Editar</button>
-          <button onClick={ () => handleDelete(item) }>Excluir</button>
-        </section>
-      ))}
     </div>
   )
 }
