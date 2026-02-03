@@ -1,10 +1,21 @@
-import { RouterProvider } from 'react-router'
-import { router } from './routes'
+
+import { Alunos } from './components/Alunos';
+import { Footer } from './components/Footer';
+
+import UserProvider from './contexts/user';
 
 function App() {
-
   return (
-      <RouterProvider router={router} />                
+    <UserProvider>
+    <div>
+      <h1>ESCOLA DEV</h1>
+      <br/>
+      <hr/>
+
+      <Alunos/>
+    </div>
+    <Footer/>
+    </UserProvider>
   )
 }
 
